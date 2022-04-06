@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B9AAA9FE27FE00A300E0EBC9 /* ReminderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AAA9FD27FE00A300E0EBC9 /* ReminderTableViewCell.swift */; };
+		B9AAAA0127FE080B00E0EBC9 /* CS_Viitor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B9AAA9FF27FE080B00E0EBC9 /* CS_Viitor.xcdatamodeld */; };
+		B9AAAA0327FE0C5600E0EBC9 /* ReminderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AAAA0227FE0C5600E0EBC9 /* ReminderDetailViewController.swift */; };
+		B9AAAA0427FE1A9D00E0EBC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E02D8D9427F6EA5200CBA596 /* LaunchScreen.storyboard */; };
+		B9AAAA0527FE1AA000E0EBC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E02D8D8C27F6EA5100CBA596 /* Main.storyboard */; };
 		E02D8D8727F6EA5100CBA596 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02D8D8627F6EA5100CBA596 /* AppDelegate.swift */; };
 		E02D8D8927F6EA5100CBA596 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02D8D8827F6EA5100CBA596 /* SceneDelegate.swift */; };
 		E02D8D8B27F6EA5100CBA596 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02D8D8A27F6EA5100CBA596 /* MainViewController.swift */; };
-		E02D8D8E27F6EA5100CBA596 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E02D8D8C27F6EA5100CBA596 /* Main.storyboard */; };
-		E02D8D9127F6EA5100CBA596 /* CS_Viitor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E02D8D8F27F6EA5100CBA596 /* CS_Viitor.xcdatamodeld */; };
 		E02D8D9327F6EA5200CBA596 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E02D8D9227F6EA5200CBA596 /* Assets.xcassets */; };
-		E02D8D9627F6EA5200CBA596 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E02D8D9427F6EA5200CBA596 /* LaunchScreen.storyboard */; };
 		E02D8DA127F6EA5300CBA596 /* CS_ViitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02D8DA027F6EA5300CBA596 /* CS_ViitorTests.swift */; };
 		E02D8DAB27F6EA5300CBA596 /* CS_ViitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02D8DAA27F6EA5300CBA596 /* CS_ViitorUITests.swift */; };
 		E02D8DAD27F6EA5300CBA596 /* CS_ViitorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02D8DAC27F6EA5300CBA596 /* CS_ViitorUITestsLaunchTests.swift */; };
@@ -37,12 +39,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B9AAA9FD27FE00A300E0EBC9 /* ReminderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTableViewCell.swift; sourceTree = "<group>"; };
+		B9AAAA0027FE080B00E0EBC9 /* CS_Viitor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CS_Viitor.xcdatamodel; sourceTree = "<group>"; };
+		B9AAAA0227FE0C5600E0EBC9 /* ReminderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailViewController.swift; sourceTree = "<group>"; };
 		E02D8D8327F6EA5100CBA596 /* CS_Viitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CS_Viitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02D8D8627F6EA5100CBA596 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E02D8D8827F6EA5100CBA596 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E02D8D8A27F6EA5100CBA596 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E02D8D8D27F6EA5100CBA596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E02D8D9027F6EA5100CBA596 /* CS_Viitor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CS_Viitor.xcdatamodel; sourceTree = "<group>"; };
 		E02D8D9227F6EA5200CBA596 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E02D8D9527F6EA5200CBA596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E02D8D9727F6EA5200CBA596 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,10 +82,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B9AAA9FA27FDFF4F00E0EBC9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B9AAA9FD27FE00A300E0EBC9 /* ReminderTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E02A798627F7129D001DA31E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				E02D8D8A27F6EA5100CBA596 /* MainViewController.swift */,
+				B9AAAA0227FE0C5600E0EBC9 /* ReminderDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -109,14 +122,15 @@
 		E02D8D8527F6EA5100CBA596 /* CS_Viitor */ = {
 			isa = PBXGroup;
 			children = (
+				B9AAA9FA27FDFF4F00E0EBC9 /* Views */,
 				E02A798627F7129D001DA31E /* ViewControllers */,
 				E02D8D8627F6EA5100CBA596 /* AppDelegate.swift */,
 				E02D8D8827F6EA5100CBA596 /* SceneDelegate.swift */,
 				E02D8D8C27F6EA5100CBA596 /* Main.storyboard */,
 				E02D8D9427F6EA5200CBA596 /* LaunchScreen.storyboard */,
+				B9AAA9FF27FE080B00E0EBC9 /* CS_Viitor.xcdatamodeld */,
 				E02D8D9227F6EA5200CBA596 /* Assets.xcassets */,
 				E02D8D9727F6EA5200CBA596 /* Info.plist */,
-				E02D8D8F27F6EA5100CBA596 /* CS_Viitor.xcdatamodeld */,
 			);
 			path = CS_Viitor;
 			sourceTree = "<group>";
@@ -242,9 +256,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E02D8D9627F6EA5200CBA596 /* LaunchScreen.storyboard in Resources */,
 				E02D8D9327F6EA5200CBA596 /* Assets.xcassets in Resources */,
-				E02D8D8E27F6EA5100CBA596 /* Main.storyboard in Resources */,
+				B9AAAA0427FE1A9D00E0EBC9 /* LaunchScreen.storyboard in Resources */,
+				B9AAAA0527FE1AA000E0EBC9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,10 +283,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E02D8D9127F6EA5100CBA596 /* CS_Viitor.xcdatamodeld in Sources */,
+				B9AAAA0127FE080B00E0EBC9 /* CS_Viitor.xcdatamodeld in Sources */,
 				E02D8D8B27F6EA5100CBA596 /* MainViewController.swift in Sources */,
 				E02D8D8727F6EA5100CBA596 /* AppDelegate.swift in Sources */,
+				B9AAAA0327FE0C5600E0EBC9 /* ReminderDetailViewController.swift in Sources */,
 				E02D8D8927F6EA5100CBA596 /* SceneDelegate.swift in Sources */,
+				B9AAA9FE27FE00A300E0EBC9 /* ReminderTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +472,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -483,6 +500,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -610,12 +628,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		E02D8D8F27F6EA5100CBA596 /* CS_Viitor.xcdatamodeld */ = {
+		B9AAA9FF27FE080B00E0EBC9 /* CS_Viitor.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				E02D8D9027F6EA5100CBA596 /* CS_Viitor.xcdatamodel */,
+				B9AAAA0027FE080B00E0EBC9 /* CS_Viitor.xcdatamodel */,
 			);
-			currentVersion = E02D8D9027F6EA5100CBA596 /* CS_Viitor.xcdatamodel */;
+			currentVersion = B9AAAA0027FE080B00E0EBC9 /* CS_Viitor.xcdatamodel */;
 			path = CS_Viitor.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
