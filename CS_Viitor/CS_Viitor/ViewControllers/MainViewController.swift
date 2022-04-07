@@ -80,7 +80,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let p = gestureRecognizer.location(in: tableView)
         if let indexPath = tableView.indexPathForRow(at: p) {
             index = indexPath.row
-            performSegue(withIdentifier: "ShowDetail", sender: self)
+            let alert = UIAlertController(title: reminders[indexPath.row].type, message: reminders[indexPath.row].time?.description, preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "Edit", style: .default, handler: {_ in
+                self.createCustomAlert(reminder: self.reminders[indexPath.row],index: indexPath.row)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
         }
     }
     
@@ -101,6 +107,17 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             reminders.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
+    }
+    
+    func createCustomAlert(reminder: ReminderEntity, index: Int)
+    {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let alertVC = sb.instantiateViewController(identifier: "EditReminderViewController") as! EditReminderViewController
+        alertVC.parentVC = self
+        alertVC.reminder = reminder
+        alertVC.index = index
+        alertVC.modalPresentationStyle = .overCurrentContext
+        self.present(alertVC, animated: false, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

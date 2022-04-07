@@ -45,14 +45,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReminderCell" id="Yd1-0W-f3X" customClass="ReminderTableViewCell" customModule="CS_Viitor" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="71.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Yd1-0W-f3X" id="gnn-gP-ClK">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="71.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="71"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medication" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ToE-kG-aMV">
-                                                    <rect key="frame" x="20" y="25" width="374" height="21.5"/>
+                                                    <rect key="frame" x="20" y="25" width="374" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -146,10 +146,96 @@
             </objects>
             <point key="canvasLocation" x="1124.6376811594205" y="43.526785714285715"/>
         </scene>
+        <!--EditReminderViewController-->
+        <scene sceneID="kYH-Zm-g3Z">
+            <objects>
+                <viewController restorationIdentifier="EditReminderViewController" storyboardIdentifier="EditReminderViewController" id="fFt-S6-8fu" userLabel="EditReminderViewController" customClass="EditReminderViewController" customModule="CS_Viitor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="S13-ph-RIb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PX0-Tc-oZ1" userLabel="Background">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="acK-Mz-6qU" userLabel="AlertView">
+                                <rect key="frame" x="24" y="363.5" width="366" height="179"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="efq-bO-j3R" userLabel="Type Edit Text">
+                                        <rect key="frame" x="24" y="12" width="318" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qaa-b8-DPO">
+                                        <rect key="frame" x="24" y="58" width="318" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CSQ-dN-7JR">
+                                        <rect key="frame" x="283" y="124" width="59" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Done"/>
+                                        <connections>
+                                            <action selector="doneEditing:" destination="fFt-S6-8fu" eventType="touchUpInside" id="KeQ-6B-uUY"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEG-wm-vPh">
+                                        <rect key="frame" x="190.5" y="124" width="68.5" height="31"/>
+                                        <color key="tintColor" systemColor="systemRedColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelEditing:" destination="fFt-S6-8fu" eventType="touchUpInside" id="47v-pV-L51"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <viewLayoutGuide key="safeArea" id="6GZ-VA-sbU"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="6GZ-VA-sbU" firstAttribute="trailing" secondItem="efq-bO-j3R" secondAttribute="trailing" constant="24" id="5RP-z7-42w"/>
+                                    <constraint firstItem="6GZ-VA-sbU" firstAttribute="trailing" secondItem="qaa-b8-DPO" secondAttribute="trailing" constant="24" id="BtR-3V-YiH"/>
+                                    <constraint firstItem="efq-bO-j3R" firstAttribute="leading" secondItem="6GZ-VA-sbU" secondAttribute="leading" constant="24" id="CAg-El-5f9"/>
+                                    <constraint firstItem="6GZ-VA-sbU" firstAttribute="bottom" secondItem="CSQ-dN-7JR" secondAttribute="bottom" constant="24" id="CBS-JX-qTZ"/>
+                                    <constraint firstItem="CSQ-dN-7JR" firstAttribute="leading" secondItem="PEG-wm-vPh" secondAttribute="trailing" constant="24" id="J3K-h8-UYB"/>
+                                    <constraint firstItem="6GZ-VA-sbU" firstAttribute="bottom" secondItem="PEG-wm-vPh" secondAttribute="bottom" constant="24" id="VS2-PU-IOG"/>
+                                    <constraint firstItem="efq-bO-j3R" firstAttribute="top" secondItem="6GZ-VA-sbU" secondAttribute="top" constant="12" id="aVw-Kz-NmL"/>
+                                    <constraint firstItem="6GZ-VA-sbU" firstAttribute="trailing" secondItem="CSQ-dN-7JR" secondAttribute="trailing" constant="24" id="bL4-Y1-njo"/>
+                                    <constraint firstItem="qaa-b8-DPO" firstAttribute="leading" secondItem="6GZ-VA-sbU" secondAttribute="leading" constant="24" id="hOz-c1-zwF"/>
+                                    <constraint firstItem="qaa-b8-DPO" firstAttribute="top" secondItem="efq-bO-j3R" secondAttribute="bottom" constant="12" id="peV-Tv-XRf"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="DoN-XH-oAO"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="acK-Mz-6qU" firstAttribute="centerY" secondItem="DoN-XH-oAO" secondAttribute="centerY" id="0pF-gU-aXN"/>
+                            <constraint firstItem="acK-Mz-6qU" firstAttribute="leading" secondItem="DoN-XH-oAO" secondAttribute="leading" constant="24" id="3ci-XO-hhA"/>
+                            <constraint firstItem="PX0-Tc-oZ1" firstAttribute="top" secondItem="S13-ph-RIb" secondAttribute="top" id="5cZ-Mf-WEL"/>
+                            <constraint firstAttribute="bottom" secondItem="PX0-Tc-oZ1" secondAttribute="bottom" id="6kV-9U-XLS"/>
+                            <constraint firstItem="acK-Mz-6qU" firstAttribute="height" secondItem="S13-ph-RIb" secondAttribute="height" multiplier="0.2" id="DRk-oy-6CK"/>
+                            <constraint firstItem="acK-Mz-6qU" firstAttribute="centerX" secondItem="PX0-Tc-oZ1" secondAttribute="centerX" id="QNc-5M-io6"/>
+                            <constraint firstItem="PX0-Tc-oZ1" firstAttribute="leading" secondItem="DoN-XH-oAO" secondAttribute="leading" id="RST-gx-zAx"/>
+                            <constraint firstItem="DoN-XH-oAO" firstAttribute="trailing" secondItem="acK-Mz-6qU" secondAttribute="trailing" constant="24" id="Zbh-2u-HlB"/>
+                            <constraint firstItem="DoN-XH-oAO" firstAttribute="trailing" secondItem="PX0-Tc-oZ1" secondAttribute="trailing" id="hc9-pu-Aca"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="alertView" destination="acK-Mz-6qU" id="xqr-BA-xff"/>
+                        <outlet property="amountEditText" destination="qaa-b8-DPO" id="bz0-39-rKG"/>
+                        <outlet property="typeEditText" destination="efq-bO-j3R" id="DDB-5I-3As"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8gD-Oi-acH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="270" y="697"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
