@@ -1,0 +1,6 @@
+framework module Pods_CS_ViitorTests {
+  umbrella header "Pods-CS_ViitorTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

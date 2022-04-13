@@ -1,0 +1,6 @@
+framework module Pods_CS_Viitor {
+  umbrella header "Pods-CS_Viitor-umbrella.h"
+
+  export *
+  module * { export * }
+}
