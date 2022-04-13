@@ -11,12 +11,11 @@ import CoreData
 class EditReminderViewController: UIViewController {
     
     @IBOutlet var alertView: UIView!
-    @IBOutlet var typeEditText: UITextField!
+    @IBOutlet var nameEditText: UITextField!
     @IBOutlet var amountEditText: UITextField!
     
     var reminder: ReminderEntity = ReminderEntity()
     var index: Int = Int()
-    //use this later to do things to the flashcards potentially
     var parentVC: MainViewController?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
@@ -29,20 +28,20 @@ class EditReminderViewController: UIViewController {
     
     func setup(){
         alertView.layer.cornerRadius = 8.0
-        typeEditText.placeholder = reminder.type
+        nameEditText.placeholder = reminder.name
         amountEditText.placeholder = String(reminder.amount)
-        typeEditText.becomeFirstResponder()
+        nameEditText.becomeFirstResponder()
     }
     
     @IBAction func doneEditing(_ sender: Any) {
         let a = amountEditText.text!
         let b = Double(a) ?? -1
-        if(typeEditText.text?.isEmpty == false && amountEditText.text?.isEmpty == false && b >= 0){
+        if(nameEditText.text?.isEmpty == false && amountEditText.text?.isEmpty == false && b >= 0){
             
             self.dismiss(animated: false, completion: {
             })
             
-            reminder.type = typeEditText.text
+            reminder.name = nameEditText.text
             reminder.amount = b
             
             do {

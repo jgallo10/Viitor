@@ -35,9 +35,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.dataSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateData(theReminders: reminders)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReminderCell", for: indexPath) as! ReminderTableViewCell
-        cell.reminderLabel.text = reminders[indexPath.row].type
+        cell.reminderLabel.text = reminders[indexPath.row].name
         cell.selectionStyle = .none
         return cell
     }
@@ -48,20 +53,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func addReminder(_ sender: Any) {
         let newReminder = NSEntityDescription.insertNewObject(forEntityName: "ReminderEntity", into: context) as! ReminderEntity
-        
-        var timeComponents = DateComponents()
-        timeComponents.year = 2022
-        timeComponents.month = 1
-        timeComponents.day = 1
-        timeComponents.timeZone = TimeZone(abbreviation: "CST")
-        timeComponents.hour = 0
-        timeComponents.minute = 0
-        let timeCalendar = Calendar(identifier: .gregorian)
-        
-        newReminder.type = "Medication \(reminders.count + 1)"
-        newReminder.time = timeCalendar.date(from: timeComponents)
+        newReminder.name = "Medication \(reminders.count + 1)"
+        newReminder.startDate = nil
+        newReminder.endDate = nil
         newReminder.amount = 0
-        newReminder.frequency = 0
+        newReminder.id = Double.random(in: 1.278945...4.239539)
         reminders.append(newReminder)
         do {
             try context.save()
@@ -80,7 +76,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let p = gestureRecognizer.location(in: tableView)
         if let indexPath = tableView.indexPathForRow(at: p) {
             index = indexPath.row
-            let alert = UIAlertController(title: reminders[indexPath.row].type, message: reminders[indexPath.row].time?.description, preferredStyle: .alert)
+            let alert = UIAlertController(title: reminders[indexPath.row].name, message: reminders[indexPath.row].startDate?.description, preferredStyle: .alert)
 
             alert.addAction(UIAlertAction(title: "Edit", style: .default, handler: {_ in
                 self.createCustomAlert(reminder: self.reminders[indexPath.row],index: indexPath.row)
@@ -123,10 +119,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "ShowDetail"){
             let vc = segue.destination as! ReminderDetailViewController
-            vc.frequency = Int(reminders[index].frequency)
-            vc.amount = Int(reminders[index].amount)
-            vc.time = reminders[index].time!
-            vc.type = reminders[index].type ?? "type was nil"
+            vc.reminders = reminders
+            vc.index = index
         }
     }
     
