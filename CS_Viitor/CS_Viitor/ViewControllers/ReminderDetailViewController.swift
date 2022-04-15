@@ -65,12 +65,12 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func dateTimeBtn(_ sender: Any) {
-        saveGo()
+        performSegue(withIdentifier: "ShowCalendar", sender: self)
     }
     
     @objc func dateTimeFunction(sender: UITapGestureRecognizer){
         print("Changing date and time")
-        saveGo()
+        performSegue(withIdentifier: "ShowCalendar", sender: self)
     }
     
     @IBAction func deleteBtn(_ sender: Any) {
@@ -145,12 +145,12 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
         present(alertController, animated: true, completion: nil)
         }
     
-    func saveGo(){
-        reminders[index].notes = notesBox.text
-        do{ try context.save()}
-        catch{print(error)}
-        performSegue(withIdentifier: "ShowCalendar", sender: self)
-    }
+//    func saveGo(){
+//        reminders[index].notes = notesBox.text
+//        do{ try context.save()}
+//        catch{print(error)}
+//        performSegue(withIdentifier: "ShowCalendar", sender: self)
+//    }
     
     func invalidInput(){
         let alert = UIAlertController(title: "Invalid Input", message: "Input is empty", preferredStyle: .alert)
