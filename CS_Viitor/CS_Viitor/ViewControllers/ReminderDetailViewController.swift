@@ -176,6 +176,11 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
             if textView.text == ""{
                 textView.text = "Add Notes Here"
                 textView.textColor = UIColor.white
+            }else{
+                reminders[index].notes = textView.text
+                do{ try context.save()}
+                catch{print(error)}
+                updateData(theReminders: reminders)
             }
         }
     
