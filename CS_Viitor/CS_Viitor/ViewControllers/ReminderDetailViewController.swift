@@ -19,6 +19,7 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var startDateView: UIView!
     @IBOutlet weak var endDateView: UIView!
     @IBOutlet weak var timeView: UIView!
+    @IBOutlet var deleteButton: UIButton!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var prevVC: MainViewController?
@@ -31,7 +32,7 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        deleteButton.tintColor = UIColor.systemRed
         updateData(theReminders: reminders)
         notesBox.returnKeyType = .done
         notesBox.delegate = self
