@@ -18,20 +18,97 @@ class ReminderDetailViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var prevVC: MainViewController?
-
     var reminders: [ReminderEntity] = []
+    var changeReminder: ReminderEntity = ReminderEntity()
+    var editBox = UITextField()
     var index: Int = 0
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         updateData(theReminders: reminders)
-        // Do any additional setup after loading the view.
+        
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ReminderDetailViewController.tapFunction))
+        nameLabel.isUserInteractionEnabled = true
+        nameLabel.addGestureRecognizer(tap)
+        
+        let amountTap = UITapGestureRecognizer(target: self, action: #selector(ReminderDetailViewController.amountFunction))
+        amountLabel.isUserInteractionEnabled = true
+        amountLabel.addGestureRecognizer(amountTap)
+        
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateData(theReminders: reminders)
+    }
+    
+    @objc func tapFunction(sender: UITapGestureRecognizer) {
+        print("tap working")
+        let alertController = UIAlertController(title: "Edit Medication", message: "Enter the name of the medication", preferredStyle: .alert)
+        alertController.addTextField(){ (UITextField) in
+            UITextField.placeholder = "Enter Medication"
+        }
+        
+        let cancleAction = UIAlertAction(title: "Cancle", style: .cancel, handler: nil)
+        let saveAction = UIAlertAction(title: "Save", style: .default){ [self]_ in
+            let inputName = alertController.textFields![0].text
+            
+            if (inputName?.isEmpty == false){
+                self.changeReminder.name = inputName
+                
+                do {try context.save()}
+                catch{print(error)}
+            }
+            else{
+                invalidInput()
+            }
+        }
+        
+        alertController.addAction(cancleAction)
+        alertController.addAction(saveAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc func amountFunction(sender: UITapGestureRecognizer){
+        print("amount tap works")
+        let alertController = UIAlertController(title: "Edit Quantity", message: "Enter the amount given", preferredStyle: .alert)
+        alertController.addTextField(){ (UITextField) in
+            UITextField.placeholder = "Enter Amount"
+        }
+        
+        let cancleAction = UIAlertAction(title: "Cancle", style: .cancel, handler: nil)
+        let saveAction = UIAlertAction(title: "Save", style: .default){ [self]_ in
+            let inputAmount = alertController.textFields![0].text
+            let numD = Double(inputAmount ?? "-1")
+            
+            if (inputAmount?.isEmpty == false && numD! > 0){
+                self.changeReminder.amount = Double(inputAmount!)!
+                
+                do {try context.save()}
+                catch{print(error)}
+            }
+            else{
+                invalidInput()
+            }
+        }
+        
+        alertController.addAction(cancleAction)
+        alertController.addAction(saveAction)
+        
+        present(alertController, animated: true, completion: nil)
+        }
+    
+    func invalidInput(){
+        let alert = UIAlertController(title: "Invalid Input", message: "Input is empty", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Got It", style: .cancel))
+        self.present(alert, animated: true)
     }
     
     func updateData(theReminders: [ReminderEntity]){
