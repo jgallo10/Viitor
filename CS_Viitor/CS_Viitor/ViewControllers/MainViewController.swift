@@ -17,6 +17,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //print("this works")
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ReminderEntity")
         do {
             reminders = try context.fetch(fetchRequest) as! [ReminderEntity]
@@ -68,6 +69,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 newReminder.endDate = nil
                 newReminder.amount = 0
                 newReminder.notes = nil
+                newReminder.time = nil
                 newReminder.id = Double.random(in: 1.278945...4.239539)
                 reminders.append(newReminder)
                      

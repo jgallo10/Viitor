@@ -219,6 +219,9 @@ class CalendarViewController: UIViewController, FSCalendarDelegate {
         }
         
         reminders[index].startDate = formatter.date(from: startDateString)
+        
+        reminders[index].time = formatter.date(from: startDateString)
+        
     }
     
     func formatDateComponents(){

@@ -23,7 +23,6 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var prevVC: MainViewController?
     var reminders: [ReminderEntity] = []
-    var changeReminder: ReminderEntity = ReminderEntity()
     var editBox = UITextField()
     var index: Int = 0
     
@@ -36,6 +35,7 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
         updateData(theReminders: reminders)
         notesBox.returnKeyType = .done
         notesBox.delegate = self
+        
         
         let nameTap = UITapGestureRecognizer(target: self, action: #selector(ReminderDetailViewController.tapFunction))
         nameLabel.isUserInteractionEnabled = true
@@ -73,6 +73,17 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
         saveGo()
     }
     
+    @IBAction func deleteBtn(_ sender: Any) {
+        do {
+            context.delete(reminders[index])
+            try context.save()
+        }
+        catch{print(error)
+        }
+        
+        //delete the row in MainViewController here
+        _ = navigationController?.popViewController(animated: true)
+    }
     
     @objc func tapFunction(sender: UITapGestureRecognizer) {
         print("tap working")
@@ -176,9 +187,11 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
             print(error)
         }
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd hh:mm a Z"
-        formatter.timeZone = TimeZone(abbreviation: "CST")
+        let dateForm = DateFormatter()
+        let timeForm = DateFormatter()
+        dateForm.dateFormat = "yyyy/MM/dd"// hh:mm a Z"
+        timeForm.dateFormat = "hh:mm a z"
+        timeForm.timeZone = TimeZone(abbreviation: "CST")
         
         nameLabel.text = reminders[index].name
         amountLabel.text = String(reminders[index].amount)
@@ -186,12 +199,17 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
         if reminders[index].startDate == nil {
             startDateLabel.text = "N/A"
         } else {
-            startDateLabel.text = formatter.string(for: reminders[index].startDate)
+            startDateLabel.text = dateForm.string(for: reminders[index].startDate)
         }
         if reminders[index].endDate == nil {
             endDateLabel.text = "N/A"
         } else {
-            endDateLabel.text = formatter.string(for: reminders[index].endDate)
+            endDateLabel.text = dateForm.string(for: reminders[index].endDate)
+        }
+        if reminders[index].time == nil{
+            timeLabel.text = "N/A"
+        }else {
+            timeLabel.text = timeForm.string(from: reminders[index].time!)
         }
         if reminders[index].notes != nil {
             notesBox.text = reminders[index].notes
