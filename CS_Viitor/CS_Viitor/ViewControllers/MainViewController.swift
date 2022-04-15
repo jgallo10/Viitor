@@ -53,19 +53,40 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func addReminder(_ sender: Any) {
         let newReminder = NSEntityDescription.insertNewObject(forEntityName: "ReminderEntity", into: context) as! ReminderEntity
-        newReminder.name = "Medication \(reminders.count + 1)"
-        newReminder.startDate = nil
-        newReminder.endDate = nil
-        newReminder.amount = 0
-        newReminder.id = Double.random(in: 1.278945...4.239539)
-        reminders.append(newReminder)
-        do {
-            try context.save()
+        let nameAlert = UIAlertController(title: "Medication", message: "Please add name of Medication", preferredStyle: .alert)
+        nameAlert.addTextField(){(UITextField) in
+            UITextField.placeholder = "EX: Cannabis"
         }
-        catch{
-            print(error)
+                
+        let cancleBtn = UIAlertAction(title: "Cancle", style: .cancel)
+        let saveBtn = UIAlertAction(title: "Save", style: .default){ [self]_ in
+            let newName = nameAlert.textFields![0].text
+            
+            if (newName?.isEmpty == false){
+                newReminder.name = newName
+                newReminder.startDate = nil
+                newReminder.endDate = nil
+                newReminder.amount = 0
+                newReminder.notes = nil
+                newReminder.id = Double.random(in: 1.278945...4.239539)
+                reminders.append(newReminder)
+                     
+                do {try context.save()}
+                catch{print(error)}
+                self.updateData(theReminders: reminders)
+            }
+            else{
+                let alert = UIAlertController(title: "Invalid Input", message: "Input is empty", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                self.present(alert, animated: true)
+            }
         }
-        self.updateData(theReminders: reminders)
+        
+        nameAlert.addAction(saveBtn)
+        nameAlert.addAction(cancleBtn)
+        present(nameAlert, animated: true, completion: nil)
+     
+        
     }
     
     @objc func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
@@ -88,6 +109,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         index = indexPath.row
+        
         performSegue(withIdentifier: "ShowDetail", sender: self)
     }
     

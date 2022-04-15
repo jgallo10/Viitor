@@ -8,13 +8,17 @@
 import UIKit
 import CoreData
 
-class ReminderDetailViewController: UIViewController {
+class ReminderDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var notesBox: UITextView!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var amountView: UIView!
+    @IBOutlet weak var startDateView: UIView!
+    @IBOutlet weak var endDateView: UIView!
+    @IBOutlet weak var timeView: UIView!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var prevVC: MainViewController?
@@ -28,18 +32,30 @@ class ReminderDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         updateData(theReminders: reminders)
+        notesBox.returnKeyType = .done
+        notesBox.delegate = self
         
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(ReminderDetailViewController.tapFunction))
+        let nameTap = UITapGestureRecognizer(target: self, action: #selector(ReminderDetailViewController.tapFunction))
         nameLabel.isUserInteractionEnabled = true
-        nameLabel.addGestureRecognizer(tap)
+        nameLabel.addGestureRecognizer(nameTap)
         
         let amountTap = UITapGestureRecognizer(target: self, action: #selector(ReminderDetailViewController.amountFunction))
-        amountLabel.isUserInteractionEnabled = true
-        amountLabel.addGestureRecognizer(amountTap)
+        amountView.isUserInteractionEnabled = true
+        amountView.addGestureRecognizer(amountTap)
         
+        let startDateTap = UITapGestureRecognizer(target: self, action: #selector(ReminderDetailViewController.dateTimeFunction))
+        startDateView.isUserInteractionEnabled = true
+        startDateView.addGestureRecognizer(startDateTap)
         
+        let endDateTap = UITapGestureRecognizer(target: self, action: #selector(ReminderDetailViewController.dateTimeFunction))
+        endDateView.isUserInteractionEnabled = true
+        endDateView.addGestureRecognizer(endDateTap)
+        
+        let TimeTap = UITapGestureRecognizer(target: self, action: #selector(ReminderDetailViewController.dateTimeFunction))
+        timeView.isUserInteractionEnabled = true
+        timeView.addGestureRecognizer(TimeTap)
         
     }
     
@@ -47,6 +63,16 @@ class ReminderDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         updateData(theReminders: reminders)
     }
+    
+    @IBAction func dateTimeBtn(_ sender: Any) {
+        saveGo()
+    }
+    
+    @objc func dateTimeFunction(sender: UITapGestureRecognizer){
+        print("Changing date and time")
+        saveGo()
+    }
+    
     
     @objc func tapFunction(sender: UITapGestureRecognizer) {
         print("tap working")
@@ -60,10 +86,11 @@ class ReminderDetailViewController: UIViewController {
             let inputName = alertController.textFields![0].text
             
             if (inputName?.isEmpty == false){
-                self.changeReminder.name = inputName
+                reminders[index].name = inputName
                 
                 do {try context.save()}
                 catch{print(error)}
+                updateData(theReminders: reminders)
             }
             else{
                 invalidInput()
@@ -72,6 +99,7 @@ class ReminderDetailViewController: UIViewController {
         
         alertController.addAction(cancleAction)
         alertController.addAction(saveAction)
+        
         
         present(alertController, animated: true, completion: nil)
     }
@@ -89,10 +117,11 @@ class ReminderDetailViewController: UIViewController {
             let numD = Double(inputAmount ?? "-1")
             
             if (inputAmount?.isEmpty == false && numD! > 0){
-                self.changeReminder.amount = Double(inputAmount!)!
+                reminders[index].amount = Double(inputAmount!)!
                 
                 do {try context.save()}
                 catch{print(error)}
+                updateData(theReminders: reminders)
             }
             else{
                 invalidInput()
@@ -105,11 +134,39 @@ class ReminderDetailViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
         }
     
+    func saveGo(){
+        reminders[index].notes = notesBox.text
+        do{ try context.save()}
+        catch{print(error)}
+        performSegue(withIdentifier: "ShowCalendar", sender: self)
+    }
+    
     func invalidInput(){
         let alert = UIAlertController(title: "Invalid Input", message: "Input is empty", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Got It", style: .cancel))
         self.present(alert, animated: true)
     }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.white{
+            textView.text = ""
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "/n" {
+            textView.resignFirstResponder()
+        }
+        return true
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView){
+            if textView.text == ""{
+                textView.text = "Add Notes Here"
+                textView.textColor = UIColor.white
+            }
+        }
     
     func updateData(theReminders: [ReminderEntity]){
         do {
@@ -127,7 +184,7 @@ class ReminderDetailViewController: UIViewController {
         amountLabel.text = String(reminders[index].amount)
         
         if reminders[index].startDate == nil {
-            startDateLabel.text = "Date Not Set"
+            startDateLabel.text = "N/A"
         } else {
             startDateLabel.text = formatter.string(for: reminders[index].startDate)
         }
@@ -135,6 +192,14 @@ class ReminderDetailViewController: UIViewController {
             endDateLabel.text = "N/A"
         } else {
             endDateLabel.text = formatter.string(for: reminders[index].endDate)
+        }
+        if reminders[index].notes != nil {
+            notesBox.text = reminders[index].notes
+        }
+        else {
+            notesBox.text = "Add Notes Here"
+            notesBox.textColor = UIColor.white
+            
         }
     }
     
