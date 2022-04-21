@@ -122,7 +122,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate {
     }
 
     @IBAction func doneEditing(_ sender: Any) {
-        if firstDate != nil && lastDate != nil{
+        if firstDate != nil{
             
             formatDate()
             scheduleNotification()
@@ -154,11 +154,12 @@ class CalendarViewController: UIViewController, FSCalendarDelegate {
         content.title = reminders[index].name!
         content.sound = .defaultCritical
         content.body = "\(reminders[index].name ?? "Default") Reminder"
+        content.badge = NSNumber(value: 3)
         print(content.body)
         
         if switchStatus.isOn == false {
             var i = 0
-            let range = datesRange(from: firstDate!, to: lastDate!)
+            let range = datesRange(from: firstDate!, to: lastDate ?? firstDate!)
 
             for d in range {
                 let trigger = UNCalendarNotificationTrigger(dateMatching: startDateComponents, repeats: false)
@@ -179,7 +180,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate {
         } else if switchStatus.isOn == true {
             let trigger = UNCalendarNotificationTrigger(dateMatching: startDateComponents, repeats: true)
             
-            let request = UNNotificationRequest(identifier: "id_\(String(reminders[index].id))_repeats", content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: "id_\(String(reminders[index].id))", content: content, trigger: trigger)
             
             UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
                 if error != nil {

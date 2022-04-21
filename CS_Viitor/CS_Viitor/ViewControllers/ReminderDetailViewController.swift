@@ -76,6 +76,7 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func deleteBtn(_ sender: Any) {
         do {
+            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["id_\(String(reminders[index].id))"])
             context.delete(reminders[index])
             try context.save()
         }
@@ -93,7 +94,7 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
             UITextField.placeholder = "Enter Medication"
         }
         
-        let cancleAction = UIAlertAction(title: "Cancle", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let saveAction = UIAlertAction(title: "Save", style: .default){ [self]_ in
             let inputName = alertController.textFields![0].text
             
@@ -109,7 +110,7 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
             }
         }
         
-        alertController.addAction(cancleAction)
+        alertController.addAction(cancelAction)
         alertController.addAction(saveAction)
         
         
@@ -123,12 +124,12 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
             UITextField.placeholder = "Enter Amount"
         }
         
-        let cancleAction = UIAlertAction(title: "Cancle", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let saveAction = UIAlertAction(title: "Save", style: .default){ [self]_ in
             let inputAmount = alertController.textFields![0].text
             let numD = Double(inputAmount ?? "-1")
             
-            if (inputAmount?.isEmpty == false && numD! > 0){
+            if (inputAmount?.isEmpty == false && numD ?? 0 > 0){
                 reminders[index].amount = Double(inputAmount!)!
                 
                 do {try context.save()}
@@ -140,7 +141,7 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
             }
         }
         
-        alertController.addAction(cancleAction)
+        alertController.addAction(cancelAction)
         alertController.addAction(saveAction)
         
         present(alertController, animated: true, completion: nil)

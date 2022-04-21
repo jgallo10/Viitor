@@ -118,6 +118,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             do {
+                UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["id_\(String(reminders[indexPath.row].id))"])
                 context.delete(reminders[indexPath.row])
                 try context.save()
             } catch{
