@@ -59,7 +59,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             UITextField.placeholder = "EX: Cannabis"
         }
                 
-        let cancleBtn = UIAlertAction(title: "Cancle", style: .cancel)
+        let cancelBtn = UIAlertAction(title: "Cancel", style: .cancel)
         let saveBtn = UIAlertAction(title: "Save", style: .default){ [self]_ in
             let newName = nameAlert.textFields![0].text
             
@@ -85,7 +85,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         nameAlert.addAction(saveBtn)
-        nameAlert.addAction(cancleBtn)
+        nameAlert.addAction(cancelBtn)
         present(nameAlert, animated: true, completion: nil)
      
         
