@@ -25,8 +25,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate {
     
     var reminders: [ReminderEntity] = []
     var index: Int = 0
-
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         calendar.delegate = self
