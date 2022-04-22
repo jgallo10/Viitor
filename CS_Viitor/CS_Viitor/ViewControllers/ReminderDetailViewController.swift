@@ -8,6 +8,10 @@
 import UIKit
 import CoreData
 
+protocol DeleteRowInTableviewDelegate: AnyObject{
+    func deleteRow(atIndex index: Int)
+}
+
 class ReminderDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var startDateLabel: UILabel!
@@ -23,6 +27,7 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var prevVC: MainViewController?
+    var delegate: DeleteRowInTableviewDelegate?
     var reminders: [ReminderEntity] = []
     var editBox = UITextField()
     var index: Int = 0
@@ -36,7 +41,6 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
         updateData(theReminders: reminders)
         notesBox.returnKeyType = .done
         notesBox.delegate = self
-        
         
         let nameTap = UITapGestureRecognizer(target: self, action: #selector(ReminderDetailViewController.tapFunction))
         nameLabel.isUserInteractionEnabled = true
@@ -65,12 +69,22 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
         updateData(theReminders: reminders)
     }
     
-    @IBAction func dateTimeBtn(_ sender: Any) {
-        performSegue(withIdentifier: "ShowCalendar", sender: self)
+    @IBAction func takenButton(_ sender: Any) {
+        let alertcontroller = UIAlertController(title: "Taken", message: "Have you taken the medication?", preferredStyle: .alert)
+        let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        let yesAction = UIAlertAction(title: "Yes", style: .default){ [self]_ in
+            reminders[index].amount = reminders[index].amount - 1
+            do {try context.save()}
+            catch{print(error)}
+            updateData(theReminders: reminders)
+        }
+        alertcontroller.addAction(noAction)
+        alertcontroller.addAction(yesAction)
+        
+        present(alertcontroller, animated: true, completion: nil)
     }
     
     @objc func dateTimeFunction(sender: UITapGestureRecognizer){
-        print("Changing date and time")
         performSegue(withIdentifier: "ShowCalendar", sender: self)
     }
     
@@ -83,12 +97,12 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
         catch{print(error)
         }
         
+        delegate?.deleteRow(atIndex: index)   //giving me found nil while unwrapping?
         //delete the row in MainViewController here
         _ = navigationController?.popViewController(animated: true)
     }
     
     @objc func tapFunction(sender: UITapGestureRecognizer) {
-        print("tap working")
         let alertController = UIAlertController(title: "Edit Medication", message: "Enter the name of the medication", preferredStyle: .alert)
         alertController.addTextField(){ (UITextField) in
             UITextField.placeholder = "Enter Medication"
@@ -118,7 +132,6 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func amountFunction(sender: UITapGestureRecognizer){
-        print("amount tap works")
         let alertController = UIAlertController(title: "Edit Quantity", message: "Enter the amount given", preferredStyle: .alert)
         alertController.addTextField(){ (UITextField) in
             UITextField.placeholder = "Enter Amount"

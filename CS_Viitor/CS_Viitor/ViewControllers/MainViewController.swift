@@ -8,16 +8,17 @@
 import UIKit
 import CoreData
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, DeleteRowInTableviewDelegate {
+    
     
     @IBOutlet weak var tableView: UITableView!
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var reminders: [ReminderEntity] = []
     var index: Int = 0
+    var counter: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print("this works")
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ReminderEntity")
         do {
             reminders = try context.fetch(fetchRequest) as! [ReminderEntity]
@@ -109,9 +110,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func deleteRow(atIndex index: Int) {
+        reminders.remove(at: index)
+//        tableView.deleteRows(at: [IndexPath(row: rowToDelete, section: 1)], with: .fade)
+        }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         index = indexPath.row
-        
         performSegue(withIdentifier: "ShowDetail", sender: self)
     }
     
@@ -144,6 +149,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "ShowDetail"){
             let vc = segue.destination as! ReminderDetailViewController
+            vc.delegate = self
             vc.reminders = reminders
             vc.index = index
         }
