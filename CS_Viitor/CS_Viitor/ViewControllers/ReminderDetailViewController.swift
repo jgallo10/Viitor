@@ -85,7 +85,6 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func dateTimeFunction(sender: UITapGestureRecognizer){
-        print("Changing date and time")
         performSegue(withIdentifier: "ShowCalendar", sender: self)
     }
     
@@ -104,7 +103,6 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func tapFunction(sender: UITapGestureRecognizer) {
-        print("tap working")
         let alertController = UIAlertController(title: "Edit Medication", message: "Enter the name of the medication", preferredStyle: .alert)
         alertController.addTextField(){ (UITextField) in
             UITextField.placeholder = "Enter Medication"
@@ -134,7 +132,6 @@ class ReminderDetailViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func amountFunction(sender: UITapGestureRecognizer){
-        print("amount tap works")
         let alertController = UIAlertController(title: "Edit Quantity", message: "Enter the amount given", preferredStyle: .alert)
         alertController.addTextField(){ (UITextField) in
             UITextField.placeholder = "Enter Amount"
